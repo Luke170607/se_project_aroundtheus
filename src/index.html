@@ -123,9 +123,9 @@
             <input
               class="popup__input popup__name popup__image-name"
               type="text"
-              name="title"
+              name="name"
               id="image-name"
-              placeholder="Title"
+              placeholder="name"
               maxlength="30"
               minlength="1"
               required
@@ -137,7 +137,7 @@
             <input
               class="popup__input popup__title popup__input_image_link"
               type="url"
-              name="Link"
+              name="link"
               id="image-link"
               placeholder="Image Link"
               required
@@ -165,12 +165,12 @@
       <li class="card">
         <img
           class="card__image"
-          src="%=require('./images/jacques-cousteau.jpg')%"
+          src="<%=require('./images/jacques-cousteau.jpg')%"
           alt="placeholder"
         />
         <img
         class="card__delete-button"
-        src="%=require('./images/Trash.svg')%>"
+        src="<%=require('./images/Trash.svg')%>"
         alt="delete button"
         />
         <div class="card__description">

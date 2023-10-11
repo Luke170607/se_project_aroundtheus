@@ -106,7 +106,7 @@ addPicBtn.addEventListener("click", () => {
 //   addPicPopup.close();
 // });
 
-addPicModalForm.addEventListener("submit", handleAddFormSubmit);
+// addPicModalForm.addEventListener("submit", handleAddFormSubmit);
 
 // imageModalCloseBtn.addEventListener("click", () => {
 //   imagePreview.close();
@@ -124,14 +124,14 @@ addPicModalForm.addEventListener("submit", handleAddFormSubmit);
 // //
 
 function renderCard(data) {
-  console.log(data);
   const card = new Card(data, "#card-template", handleImageClick);
-  return card.getView();
+  const element = card.getView();
+  cardList.prepend(element);
 }
 
-//const cardSection = new Section(
-//{ items: initialCards, renderer: renderCard },
-//  ".cards__list"
-//);
+const cardSection = new Section(
+  { items: initialCards, renderer: renderCard },
+  ".cards__list"
+);
 
-// cardSection.renderItems();
+cardSection.renderItems();

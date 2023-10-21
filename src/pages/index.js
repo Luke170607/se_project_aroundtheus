@@ -61,7 +61,7 @@ function handleImageClick(card) {
     link: card.src,
     name: card.alt,
   };
-  //   imagePreview.open(data);
+  imagePreview.open(data);
 }
 
 function handleAddFormSubmit(data) {
@@ -114,8 +114,8 @@ addPicBtn.addEventListener("click", () => {
 // // PopupWithImage
 // //
 
-// const imagePreview = new PopupWithImage("#popup-image");
-// imagePreview.setEventListeners();
+const imagePreview = new PopupWithImage("#popup-image");
+imagePreview.setEventListeners();
 
 // //
 // // Section

@@ -11,13 +11,14 @@ export default class Card {
       this._handleDeleteButton()
     );
     this._likeButton.addEventListener("click", () => this._handleLikeButton());
-    this._cardImageElement.addEventListener("click", () =>
-      this._handleImageClick(this._cardImageElement)
-    );
+    this._cardImageElement.addEventListener("click", () => {
+      this._handleImageClick(this._cardImageElement);
+      console.log(this._handleImageClick);
+    });
   }
 
   _handleLikeButton() {
-    this._likeButton.toggle(".card__like-button_active");
+    this._likeButton.classList.toggle("card__like-button_active");
   }
 
   _handleDeleteButton() {

@@ -189,4 +189,9 @@
   .popup__button {
     font-size: 14px;
   }
+
+  .popup__image-preview {
+    max-width: 75vw;
+    max-height: 75vh;
+  }
 }

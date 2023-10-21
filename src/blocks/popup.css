@@ -89,9 +89,10 @@
   height: 40px;
   width: 40px;
   position: absolute;
-  top: -40px;
-  right: -40px;
+  top: -39px;
+  right: -37px;
   cursor: pointer;
+  transform: rotate(45deg);
 }
 
 .popup__close:hover {
@@ -119,7 +120,7 @@
   margin-bottom: 48px;
 }
 
-.modal__button {
+.popup__button {
   cursor: pointer;
   border: none;
   background-color: #000;

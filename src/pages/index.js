@@ -72,11 +72,11 @@ function handleAddFormSubmit(data) {
 }
 
 function handleEditProfileFormSubmit(data) {
-  //userInfo.setUserInfo(data);
-  //profileName.textContent = profileModalName.value;
-  //profileTitle.textContent = profileModalTitle.value;
-  //console.log(data);
-  //editProfilePopup.close();
+  userInfo.setUserInfo(data);
+  profileName.textContent = profileModalName.value;
+  profileTitle.textContent = profileModalTitle.value;
+  console.log(data);
+  editProfilePopup.close();
 }
 
 // //

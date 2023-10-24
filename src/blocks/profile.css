@@ -36,7 +36,7 @@
 }
 
 .profile__edit-button {
-  background: transparent url(../images/edit-icon.svg) center no-repeat;
+  background: transparent;
   border-style: none;
   background-color: transparent;
   margin-top: 22px;

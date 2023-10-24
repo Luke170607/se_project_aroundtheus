@@ -33,24 +33,20 @@ export default class Card {
       .cloneNode(true);
   }
 
-  _setCardElements() {
-    this._cardImageElement = this._cardElement.querySelector(".card__image");
-    this._cardImageElement.alt = this._name;
-    this._cardImageElement.src = this._link;
-    this._cardTitleElement.textContent = this._name;
-  }
-
   getView() {
     this._cardElement = this._getTemplate();
     this._cardTitleElement = this._cardElement.querySelector(".card__title");
     this._likeButton = this._cardElement.querySelector(".card__like-button");
-    console.log(this._likeButton);
+    this._cardImageElement = this._cardElement.querySelector(".card__image");
+    this._cardImageElement.alt = this._name;
+    this._cardImageElement.src = this._link;
+    this._cardTitleElement.textContent = this._name;
 
     this._imageDeleteButton = this._cardElement.querySelector(
       ".card__delete-button"
     );
 
-    this._setCardElements();
+    // this._setCardElements();
     this._setEventListeners();
     return this._cardElement;
   }

@@ -1,6 +1,13 @@
+import {
+  profileName,
+  profileTitle,
+  profileModalName,
+  profileModalTitle,
+} from "../utils/constants.js";
+
 export default class UserInfo {
-  constructor(usernameSelector, aboutSelector) {
-    this._name = document.querySelector(usernameSelector);
+  constructor(userNameSelector, aboutSelector) {
+    this._name = document.querySelector(userNameSelector);
     this._about = document.querySelector(aboutSelector);
   }
 
@@ -13,9 +20,9 @@ export default class UserInfo {
   }
 
   setUserInfo({ name, about }) {
-    console.log(name);
+    profileName.textContent = profileModalName.value;
+    profileTitle.textContent = profileModalTitle.value;
     this._name.textContent = name;
     this._about.textContent = about;
-    console.log(this._name.textContent);
   }
 }

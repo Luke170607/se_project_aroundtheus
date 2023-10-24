@@ -49,7 +49,6 @@ editFormValidator.enableValidation();
 const addPicModalForm = addPicModal.querySelector(".popup__form");
 const addFormValidator = new FormValidator(validationSettings, addPicModalForm);
 addFormValidator.enableValidation();
-
 // // User info //
 
 const userInfo = new UserInfo(".profile__name", ".profile__title");
@@ -65,7 +64,6 @@ function handleImageClick(card) {
 }
 
 function handleAddFormSubmit(data) {
-  console.log("data", data);
   const element = renderCard(data);
   cardList.append(element);
   addPicPopup.close();
@@ -73,9 +71,6 @@ function handleAddFormSubmit(data) {
 
 function handleEditProfileFormSubmit(data) {
   userInfo.setUserInfo(data);
-  profileName.textContent = profileModalName.value;
-  profileTitle.textContent = profileModalTitle.value;
-  console.log(data);
   editProfilePopup.close();
 }
 
@@ -91,24 +86,10 @@ profileEditBtn.addEventListener("click", () => {
   editProfilePopup.open();
 });
 
-// profileModalCloseBtn.addEventListener("click", () => {
-//   editProfilePopup.close();
-// });
-
 addPicBtn.addEventListener("click", () => {
-  //addFormValidator.resetValidation(); Still need to take a look at form validation functionality
+  addFormValidator.resetValidation();
   addPicPopup.open();
 });
-
-// addPicModalCloseBtn.addEventListener("click", () => {
-//   addPicPopup.close();
-// });
-
-// addPicModalForm.addEventListener("submit", handleAddFormSubmit);
-
-// imageModalCloseBtn.addEventListener("click", () => {
-//   imagePreview.close();
-// });
 
 // //
 // // PopupWithImage
@@ -122,9 +103,7 @@ imagePreview.setEventListeners();
 // //
 
 function renderCard(data) {
-  // console.log(data);
   const card = new Card(data, "#card-template", handleImageClick);
-  // return card.getView();
   const element = card.getView();
   cardList.prepend(element);
 }

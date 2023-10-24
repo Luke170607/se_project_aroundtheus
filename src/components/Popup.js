@@ -32,10 +32,8 @@ export default class Popup {
   };
 
   setEventListeners() {
-    // this._openButton.addEventListener("click", this.open());
     this._closeButton.addEventListener("click", () => {
       this.close();
     });
-    // I didnt have this as an arrow function and it wasn't working.......... ^^^
   }
 }

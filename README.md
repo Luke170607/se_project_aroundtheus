@@ -1,10 +1,10 @@
-# Project 7: Around The U.S.
+# Project 8: Around The U.S.
 
 ### Overview
 
-- This project allowed me to showcase my understanding how to refactor code in order to update and organize my Javascript into seperate modules that would allow the code to function in the same way, but using different tools. Tools such as FormValidator, Utilities, and rendering cards through Card.js. All of these are imported into the index.js file and then executed to function in that file.
+- This project allowed me to compartmentalize my code in Javascript to break it down by sections, userInfo, entries, and popups to isolate functionality. The goal was to succesfully refactor the majority of the Javascript code and improve on cleaning up the code to improve functionality.
 
-I thoroughly enjoyed implementing new ways to showcase functions and accesability with a more cut and clear organized approach to Javascript.
+I thoroughly enjoyed implementing new ways to showcase functions and accesability with a more cut and clear re-organized approach to Javascript.
 
 - [Link to the project on Figma](https://www.figma.com/file/N3zUeequnpvMX807FfYAZW/Sprint-6-Around-The-U.S.?node-id=0-1&t=88iVO80aevkZBggI-0)
 

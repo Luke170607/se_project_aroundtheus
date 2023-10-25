@@ -64,8 +64,7 @@ function handleImageClick(card) {
 }
 
 function handleAddFormSubmit(data) {
-  const element = renderCard(data);
-  cardList.append(element);
+  renderCard(data);
   addPicPopup.close();
 }
 
@@ -105,7 +104,8 @@ imagePreview.setEventListeners();
 function renderCard(data) {
   const card = new Card(data, "#card-template", handleImageClick);
   const element = card.getView();
-  cardList.prepend(element);
+  cardSection.additem(element);
+  console.log(cardSection);
 }
 
 const cardSection = new Section(

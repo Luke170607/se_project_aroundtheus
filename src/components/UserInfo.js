@@ -20,8 +20,8 @@ export default class UserInfo {
   }
 
   setUserInfo({ name, about }) {
-    profileName.textContent = profileModalName.value;
-    profileTitle.textContent = profileModalTitle.value;
+   // profileName.textContent = profileModalName.value;
+    // profileTitle.textContent = profileModalTitle.value;
     this._name.textContent = name;
     this._about.textContent = about;
   }

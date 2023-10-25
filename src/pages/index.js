@@ -69,7 +69,10 @@ function handleAddFormSubmit(data) {
 }
 
 function handleEditProfileFormSubmit(data) {
-  userInfo.setUserInfo(data);
+  userInfo.setUserInfo(data) {
+    profileName.textContent = profileModalName.value;
+    profileTitle.textContent = profileModalTitle.value;
+  };
   editProfilePopup.close();
 }
 
@@ -104,7 +107,7 @@ imagePreview.setEventListeners();
 function renderCard(data) {
   const card = new Card(data, "#card-template", handleImageClick);
   const element = card.getView();
-  cardSection.additem(element);
+  cardSection.addItem(element);
   console.log(cardSection);
 }
 

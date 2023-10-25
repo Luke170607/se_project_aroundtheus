@@ -109,7 +109,6 @@ function renderCard(data) {
   const card = new Card(data, "#card-template", handleImageClick);
   const element = card.getView();
   cardSection.addItem(element);
-  console.log(cardSection);
 }
 
 const cardSection = new Section(

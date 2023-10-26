@@ -69,9 +69,6 @@ function handleAddFormSubmit(data) {
 
 function handleEditProfileFormSubmit(data) {
   userInfo.setUserInfo(data);
-  {
-    profileTitle.textContent = profileModalTitle.value;
-  }
   editProfilePopup.close();
 }
 

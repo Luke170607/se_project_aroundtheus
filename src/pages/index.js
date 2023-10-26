@@ -17,7 +17,6 @@ import {
   profileModalCloseBtn,
   profileModalName,
   profileModalTitle,
-  profileName,
   profileTitle,
   addPicBtn,
   addPicModal,
@@ -71,7 +70,6 @@ function handleAddFormSubmit(data) {
 function handleEditProfileFormSubmit(data) {
   userInfo.setUserInfo(data);
   {
-    profileName.textContent = profileModalName.value;
     profileTitle.textContent = profileModalTitle.value;
   }
   editProfilePopup.close();

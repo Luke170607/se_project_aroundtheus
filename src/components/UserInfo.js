@@ -1,10 +1,3 @@
-import {
-  profileName,
-  profileTitle,
-  profileModalName,
-  profileModalTitle,
-} from "../utils/constants.js";
-
 export default class UserInfo {
   constructor(userNameSelector, aboutSelector) {
     this._name = document.querySelector(userNameSelector);

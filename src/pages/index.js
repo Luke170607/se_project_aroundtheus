@@ -17,6 +17,7 @@ import {
   profileModalCloseBtn,
   profileModalName,
   profileModalTitle,
+
   profileTitle,
   addPicBtn,
   addPicModal,

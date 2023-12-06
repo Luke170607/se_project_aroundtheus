@@ -1,28 +1,24 @@
-.header__container {
+.header {
   display: flex;
-  flex-direction: column;
-  max-width: 880px;
-  margin-left: auto;
-  margin-right: auto;
-
+  width: 100%;
   border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+  position: relative;
+  box-sizing: border-box;
 }
-
 .header__logo {
   width: 173px;
   height: 33px;
-  margin-bottom: 41px;
+  margin: 45px auto 41px 0;
 }
-
-@media screen and (max-width: 880px) {
-  .header__logo {
-    margin-left: 27px;
-  }
-}
-
-@media screen and (max-width: 568px) {
+@media screen and (max-width: 320px) {
   .header__logo {
     width: 126px;
     height: 24px;
+    margin: 28px 0 32px 27px;
+  }
+  .header {
+    max-height: 84px;
+    min-width: 320px;
+    margin: 0 auto;
   }
 }

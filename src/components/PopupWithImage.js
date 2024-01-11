@@ -1,15 +1,15 @@
 import { Popup } from "./Popup.js";
 
 export class PopupWithImage extends Popup {
-  constructor(popUpSelector) {
-    super(popUpSelector);
+  constructor(popupSelector) {
+    super(popupSelector);
   }
   openModal(name, link) {
-    this.popUpImage = this._popUpElement.querySelector(".popup__image-preview");
-    this.popUpTitle = this._popUpElement.querySelector(".popup__image-caption");
-    this.popUpImage.src = link;
-    this.popUpImage.alt = name;
-    this.popUpTitle.textContent = name;
+    this.popupImage = this._popupElement.querySelector(".popup__image-preview");
+    this.popupTitle = this._popupElement.querySelector(".popup__image-caption");
+    this.popupImage.src = link;
+    this.popupImage.alt = name;
+    this.popupTitle.textContent = name;
     super.openModal();
   }
 }

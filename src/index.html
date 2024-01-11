@@ -12,12 +12,11 @@
   <body class="page">
     <div class="page__content">
       <header class="header">
-        
-          <img
-            class="header__logo"
-            src="<%=require('./images/logo.svg')%>"
-            alt="Around The U.S. logo"
-          />
+        <img
+          class="header__logo"
+          src="<%=require('./images/logo.svg')%>"
+          alt="Around The U.S. logo"
+        />
       </header>
 
       <main class="main">
@@ -66,6 +65,7 @@
                   name="title"
                   maxlength="40"
                   minlength="2" />
+                <div id="profile-title-input-redline"></div>
                 <span
                   class="popup__form-error"
                   id="profile-title-input-error"
@@ -81,6 +81,7 @@
                   name="description"
                   maxlength="200"
                   minlength="2" />
+                <div id="profile-description-input-redline"></div>
                 <span
                   class="popup__form-error"
                   id="profile-description-input-error"
@@ -90,7 +91,7 @@
             <button type="submit" class="popup__form-button">Save</button>
           </form>
         </div>
-        <button type="button" class="popup__container></button>
+        <button type="button" class="popup__container"></button>
       </div>
     </section>
     <section class="popup" id="card-popup">
@@ -108,12 +109,14 @@
                   required
                   maxlength="30"
                   minlength="1"
-                  name="place" />
+                  name="place"
+                />
+                <div id="add-title-input-redline"></div>
                 <span
                   class="popup__form-error"
                   id="add-title-input-error"
-                ></span
-              ></label>
+                ></span>
+              </label>
               <label class="popup__form-label"
                 ><input
                   class="popup__form-input"
@@ -122,6 +125,7 @@
                   required
                   type="url"
                   name="Url" />
+                <div id="URL-input-redline"></div>
                 <span class="popup__form-error" id="URL-input-error"></span
               ></label>
             </fieldset>
@@ -134,7 +138,7 @@
             </button>
           </form>
         </div>
-        <button type="button" class="popup__container></button>
+        <button type="button" class="popup__container"></button>
       </div>
     </section>
 
@@ -152,6 +156,7 @@
                   required
                   type="url"
                   name="Url" />
+                <div id="URL-input-redline"></div>
                 <span class="popup__form-error" id="URL-input-error"></span
               ></label>
             </fieldset>
@@ -164,18 +169,15 @@
             </button>
           </form>
         </div>
-        <button type="button" class="popup__container-close></button>
+        <button type="button" class="popup__container-close"></button>
       </div>
     </section>
 
     <section class="popup" id="image-popup">
       <div class="popup__container-image">
-        <button type="button" class="popup__container></button>
+        <button type="button" class="popup__container"></button>
         <div>
-          <img 
-          class="popup__image" 
-          src="#" 
-          alt=""> </img>
+          <img class="popup__image" src="#" alt="" />
           <h2 class="popup__box-image-title"></h2>
         </div>
       </div>
@@ -184,17 +186,17 @@
       <div class="popup__container">
         <div class="popup__box">
           <form name="popup" class="popup__form" id="delete-popup-form">
-          <h2 class="popup__box-title">Are you sure?</h2>
-          <button
-          id="delete-popup-submit"
-          type="submit"
-          class="popup__form-button"
-          >
-          Yes
-          </button>
+            <h2 class="popup__box-title">Are you sure?</h2>
+            <button
+              id="delete-popup-submit"
+              type="submit"
+              class="popup__form-button"
+            >
+              Yes
+            </button>
+          </form>
         </div>
-      </form>
-        <button type="button" class="popup__container></button>
+        <button type="button" class="popup__container"></button>
       </div>
     </section>
     <template id="card-template">

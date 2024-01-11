@@ -1,7 +1,7 @@
 // import all the classes //
 
 import Card from "../components/Card";
-import initialCards from "../utils/constants.js";
+// import initialCards from "../utils/constants.js"; //
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
@@ -15,19 +15,24 @@ import { Api } from "../components/Api.js";
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
-    authorization: "d574262c-ae4c-40fc-8f2f-00d334fb3331",
+    authorization: "bd0f4ac6-05af-45e7-b717-05910a3f3119",
     "Content-Type": "application/json",
   },
 });
 
 const renderCard = (cardData) => {
+  console.log(document.querySelector(constants.selectors.deleteButtonSelector));
+  console.log(document.querySelector(".gallery__card"));
   const card = new Card(
     cardData,
     constants.selectors.cardTemplate,
     constants.selectors.deleteSelector,
     handleCardClick,
     handleDelete,
-    handleToggleLikes
+    handleToggleLikes,
+    document.querySelector(constants.selectors.deleteButtonSelector),
+    document.querySelector(constants.selectors.likeSelectorSelector),
+    document.querySelector(constants.selectors.imageSelector)
   );
   return card.getView();
 };
@@ -88,14 +93,14 @@ function handleToggleLikes(id, isLiked, card) {
 
 //Form validation for profile name and description //
 
-const editFormValidator = newFormValidator(
+const editFormValidator = new FormValidator(
   constants.settings,
   constants.profileEditForm
 );
 
 editFormValidator.enableValidation();
 
-const avatarFormValidator = new newFormValidator(
+const avatarFormValidator = new FormValidator(
   constants.settings,
   constants.avatarForm
 );
@@ -151,6 +156,7 @@ let cardSection;
 api
   .getInitialCards()
   .then((data) => {
+    // console.log(data);
     cardSection = new Section(
       {
         items: data,
@@ -167,29 +173,33 @@ api
 //Submit Button handler
 //Toggle Submit button State
 /**Event Handlers*/
-function handleProfileEditSubmit(modalInputs, popUpForm) {
+function handleProfileEditSubmit(modalInputs, popupForm) {
+  console.log(modalInputs);
   api
     .updateInfo(modalInputs)
     .then(() => {
       const { title, description } = modalInputs;
       newUserInfo.setUserInfo(title, description);
-      editFormValidator.toggleButtonState();
+      editFormValidator._toggleButtonState(
+        this._popupForm.querySelectorAll(".popup__form-input"),
+        popupForm.querySelector(".popup__form-button")
+      );
       profilePopup.closeModal();
     })
     .catch((err) => {
       console.error(err); // log the error to the console
     })
     .finally(() => {
-      popUpForm.querySelector(".popup__form-button").innerText = "Save";
+      popupForm.querySelector(".popup__form-button").innerText = "Save";
     });
 }
-function handleAddModalSubmit(modalInputs, popUpForm) {
+function handleAddModalSubmit(modalInputs, popupForm) {
   api
     .postCards(modalInputs)
     .then((res) => {
       const newCard = renderCard(res);
       cardSection.addItems(newCard);
-      popUpForm.reset();
+      popupForm.reset();
       addFormValidator.toggleButtonState();
       cardPopUp.closeModal();
     })
@@ -197,15 +207,15 @@ function handleAddModalSubmit(modalInputs, popUpForm) {
       console.error(err); // log the error to the console
     })
     .finally(() => {
-      popUpForm.querySelector(".popup__form-button").innerText = "Save";
+      popupForm.querySelector(".popup__form-button").innerText = "Save";
     });
 }
-function handleAvatarSubmit(modalInputs, popUpForm) {
+function handleAvatarSubmit(modalInputs, popupForm) {
   api
     .updateAvatar(modalInputs)
     .then(() => {
       newUserInfo.setAvatar(modalInputs.Url);
-      popUpForm.reset();
+      popupForm.reset();
       avatarFormValidator.toggleButtonState();
       avatarPopUp.closeModal();
     })
@@ -213,7 +223,7 @@ function handleAvatarSubmit(modalInputs, popUpForm) {
       console.error(err); // log the error to the console
     })
     .finally(() => {
-      popUpForm.querySelector(".popup__form-button").innerText = "Save";
+      popupForm.querySelector(".popup__form-button").innerText = "Save";
     });
 }
 api

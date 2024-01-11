@@ -16,6 +16,20 @@ export default class Card {
     this._handleCardClick = handleCardClick;
     this._handleDelete = handleDelete;
     this._handleToggleLikes = handleToggleLikes;
+
+    const cardTemplate = document.querySelector("#card-template");
+    const clone = cardTemplate.cloneNode(true);
+    this._deleteButton = clone.querySelectorAll(".gallery__card-delete");
+
+    document.querySelector(".gallery__cards").appendChild(clone);
+
+    this._likeButton = clone.querySelectorAll(".gallery__card-button");
+
+    document.querySelector(".gallery__cards").appendChild(clone);
+
+    this._cardImage = clone.querySelectorAll(".gallery__card-image");
+
+    document.querySelector(".gallery__cards").appendChild(clone);
   }
 
   //like button
@@ -24,7 +38,8 @@ export default class Card {
       this._handleToggleLikes(this._id, this._isLiked, this);
     });
 
-    // delete button
+    // delete button\
+    console.log(this._deleteButton);
     this._deleteButton.addEventListener("click", () => {
       this._handleDelete(this._id, this);
     });

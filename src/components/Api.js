@@ -1,9 +1,9 @@
 import { data } from "autoprefixer";
 
 export class Api {
-  constructor({baseUrl, headers}) {
+  constructor({ baseUrl, headers }) {
     // constructor body
-    this._baseUrl = baseUrl
+    this._baseUrl = baseUrl;
     this._headers = headers;
   }
   _handleResponse(res) {
@@ -32,6 +32,7 @@ export class Api {
   //editing profile
   updateInfo(modalInputs) {
     const { title, description } = modalInputs;
+    console.log(modalInputs);
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,

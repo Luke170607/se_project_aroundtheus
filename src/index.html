@@ -65,7 +65,10 @@
                   name="title"
                   maxlength="40"
                   minlength="2" />
-                <div id="profile-title-input-redline"></div>
+                <div
+                  class=".popup__input_type_error"
+                  id="profile-title-input-redline"
+                ></div>
                 <span
                   class="popup__form-error"
                   id="profile-title-input-error"
@@ -79,13 +82,16 @@
                   placeholder="description"
                   required
                   name="description"
-                  maxlength="200"
+                  maxlength="1000"
                   minlength="2" />
-                <div id="profile-description-input-redline"></div>
-                <span
+                <div
+                  class=".popup__input_type_error"
+                  id="profile-description-input-redline"
+                ></div>
+                <div
                   class="popup__form-error"
                   id="profile-description-input-error"
-                ></span
+                ></div
               ></label>
             </fieldset>
             <button type="submit" class="popup__form-button">Save</button>
@@ -111,7 +117,11 @@
                   minlength="1"
                   name="place"
                 />
-                <div id="add-title-input-redline"></div>
+                <span
+                  class=".popup__input_type_error"
+                  id="add-title-input-redline"
+                >
+                </span>
                 <span
                   class="popup__form-error"
                   id="add-title-input-error"
@@ -125,8 +135,9 @@
                   required
                   type="url"
                   name="Url" />
-                <div id="URL-input-redline"></div>
-                <span class="popup__form-error" id="URL-input-error"></span
+                <span class=".popup__input_type_error" id="URL-input-redline">
+                </span>
+                <span class="popup__form-error" id="URL-input-error"> </span
               ></label>
             </fieldset>
             <button
@@ -142,7 +153,7 @@
       </div>
     </section>
 
-    <section class="modal" id="avatar-popup">
+    <section class="popup" id="avatar-popup">
       <div class="popup__container">
         <div class="popup__box">
           <h2 class="popup__box-title">Change profile picture</h2>
@@ -156,7 +167,10 @@
                   required
                   type="url"
                   name="Url" />
-                <div id="URL-input-redline"></div>
+                <span
+                  class=".popup__input_type_error"
+                  id="URL-input-redline"
+                ></span>
                 <span class="popup__form-error" id="URL-input-error"></span
               ></label>
             </fieldset>

@@ -10,26 +10,25 @@ export class Api {
     if (res.ok) {
       return res.json();
     }
-    
+
     return Promise.reject(`Error: ${res.status}`);
   }
-  
+
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
     }).then(this._handleResponse);
   }
-  
+
   getCardsById(id) {
     return fetch(`${this._baseUrl}/cards/${id}`);
   }
-  /
   loadInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
     }).then(this._handleResponse);
   }
-  
+
   updateInfo(modalInputs) {
     const { title, description } = modalInputs;
     console.log(modalInputs);
@@ -59,7 +58,7 @@ export class Api {
 
   postCards(modalInputs) {
     const { place, Url } = modalInputs;
-    
+
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: this._headers,
@@ -72,7 +71,6 @@ export class Api {
     });
   }
   deleteCards(id) {
-    
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: "DELETE",
       headers: this._headers,
@@ -89,7 +87,6 @@ export class Api {
     });
   }
   toLike(id) {
-    
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "PUT",
       headers: this._headers,

@@ -17,19 +17,14 @@ export default class Card {
     this._handleDelete = handleDelete;
     this._handleToggleLikes = handleToggleLikes;
 
-    const cardTemplate = document.querySelector("#card-template");
-    const clone = cardTemplate.cloneNode(true);
-    this._deleteButton = clone.querySelectorAll(".gallery__card-delete");
+    // //const cardTemplate = document.querySelector("#card-template");
+    // // const clone = cardTemplate.cloneNode(true);
+    // /const clone = document.importNode(cardTemplate.content, true);
+    // ///this._deleteButton = clone.querySelector(".gallery__card-delete");
+    // this._likeButton = clone.querySelector(".gallery__card-button");
+    // this._cardImage = clone.querySelector(".gallery__card-image");
 
-    document.querySelector(".gallery__cards").appendChild(clone);
-
-    this._likeButton = clone.querySelectorAll(".gallery__card-button");
-
-    document.querySelector(".gallery__cards").appendChild(clone);
-
-    this._cardImage = clone.querySelectorAll(".gallery__card-image");
-
-    document.querySelector(".gallery__cards").appendChild(clone);
+    // document.querySelector(".gallery__cards").appendChild(clone);
   }
 
   //like button
@@ -39,8 +34,7 @@ export default class Card {
     });
 
     // delete button\
-    console.log(this._deleteButton);
-    this._deleteButton.addEventListener("click", () => {
+    this._trashButton.addEventListener("click", () => {
       this._handleDelete(this._id, this);
     });
 
@@ -80,6 +74,7 @@ export default class Card {
     this._cardImage = this._card.querySelector(".gallery__card-image");
     this._trashButton = this._card.querySelector(".gallery__card-delete");
     this._cardImage.src = this._link;
+    console.log(this._link);
     this._card.querySelector(".gallery__card-title").textContent = this._name;
     this._cardImage.alt = "Photo of " + `${this._name}`;
     // set listeners

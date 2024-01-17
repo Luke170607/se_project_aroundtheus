@@ -1,3 +1,11 @@
+import "../blocks/footer.css";
+import "../blocks/gallery.css";
+import "../blocks/header.css";
+import "../blocks/main.css";
+import "../blocks/page.css";
+import "../blocks/popup.css";
+import "../blocks/profile.css";
+
 // import all the classes //
 
 import Card from "../components/Card";
@@ -21,7 +29,6 @@ const api = new Api({
 });
 
 const renderCard = (cardData) => {
-  console.log(document.querySelector(constants.selectors.deleteButtonSelector));
   console.log(document.querySelector(".gallery__card"));
   const card = new Card(
     cardData,
@@ -135,7 +142,7 @@ const avatarPopUp = new PopupWithForm(
   constants.selectors.avatarSelector,
   handleAvatarSubmit
 );
-avatarPopUp.setEventListeners();
+// avatarPopUp.setEventListeners();
 //Buttons that Open Popup with forms
 // grab from userinfo name + descriptions
 const newUserInfo = new UserInfo(constants.selectors);
@@ -156,7 +163,6 @@ let cardSection;
 api
   .getInitialCards()
   .then((data) => {
-    // console.log(data);
     cardSection = new Section(
       {
         items: data,

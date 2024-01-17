@@ -142,7 +142,7 @@ const avatarPopUp = new PopupWithForm(
   constants.selectors.avatarSelector,
   handleAvatarSubmit
 );
-// avatarPopUp.setEventListeners();
+avatarPopUp.setEventListeners();
 //Buttons that Open Popup with forms
 // grab from userinfo name + descriptions
 const newUserInfo = new UserInfo(constants.selectors);

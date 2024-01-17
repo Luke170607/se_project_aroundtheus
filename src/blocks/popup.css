@@ -21,7 +21,6 @@
   width: 100%;
   position: relative;
   margin: auto;
-  display: flex;
   justify-content: center;
   padding: 0 19px;
 }
@@ -59,8 +58,14 @@
   line-height: 15px;
 }
 
+.popup__container-close-wrapper {
+  position: absolute;
+  top: -13.5%;
+  left: 112%;
+}
+
 .popup__container-close {
-  background-image: url(../images/CLOSE1.jpg);
+  background-image: url(../images/newplus.svg);
   background-position: center;
   background-repeat: no-repeat;
   background-color: transparent;
@@ -68,9 +73,9 @@
   width: 40px;
   height: 40px;
   position: relative;
-  top: -40px;
   rotate: 45deg;
   transition: opacity 1s linear;
+  background-size: 100%;
 }
 .popup__container-close:hover {
   cursor: pointer;

@@ -22,12 +22,12 @@
   position: relative;
   margin: auto;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   padding: 0 19px;
 }
 
 .popup__box {
-  width: 330px;
+  width: 100%;
   height: auto;
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
@@ -60,7 +60,7 @@
 }
 
 .popup__container-close {
-  background-image: url(../images/Close.jpg);
+  background-image: url(../images/CLOSE1.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-color: transparent;
@@ -69,6 +69,7 @@
   height: 40px;
   position: relative;
   top: -40px;
+  rotate: 45deg;
   transition: opacity 1s linear;
 }
 .popup__container-close:hover {

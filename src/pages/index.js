@@ -51,11 +51,18 @@ function handleCardClick(name, link) {
 }
 
 //Deleting the cards popup API with the event handler //
-const confirmPopup = new PopupWithForm(constants.selectors.deleteSelector);
+const confirmPopup = new PopupWithForm(constants.selectors.deleteSelector, {
+  handleSubmit: () => {}, // your handler logic here
+  buttonText: "Yes",
+  loadingButtonText: "Deleting...",
+});
 confirmPopup.setEventListeners();
+
 function handleDelete(id, card) {
   confirmPopup.openModal();
   confirmPopup.setSubmitAction(() => {
+    confirmPopup.renderLoading(true); // Show loading state
+
     api
       .deleteCards(id)
       .then(() => {
@@ -63,11 +70,10 @@ function handleDelete(id, card) {
         card.deleteUI();
       })
       .catch((err) => {
-        console.error(err); //Error gets logged to the console //
+        console.error(err); // Error gets logged to the console
       })
-
       .finally(() => {
-        constants.deleteFormSubmit.innerText = "Yes";
+        confirmPopup.renderLoading(false); // Hide loading state
       });
   });
 }
@@ -126,23 +132,27 @@ function handleFormFill(userInfoList) {
   constants.profileDescriptionInput.value = userInfoList.description;
 }
 
-const profilePopup = new PopupWithForm(
-  constants.selectors.profileSelector,
-  handleProfileEditSubmit
-);
+const profilePopup = new PopupWithForm(constants.selectors.profileSelector, {
+  handleSubmit: handleProfileEditSubmit,
+  buttonText: "Save",
+  loadingButtonText: "Saving...",
+});
 profilePopup.setEventListeners();
 
-const cardPopUp = new PopupWithForm(
-  constants.selectors.addSelector,
-  handleAddModalSubmit
-);
+const cardPopUp = new PopupWithForm(constants.selectors.addSelector, {
+  handleSubmit: handleAddModalSubmit,
+  buttonText: "Save",
+  loadingButtonText: "Saving...",
+});
 cardPopUp.setEventListeners();
 
-const avatarPopUp = new PopupWithForm(
-  constants.selectors.avatarSelector,
-  handleAvatarSubmit
-);
+const avatarPopUp = new PopupWithForm(constants.selectors.avatarSelector, {
+  handleSubmit: handleAvatarSubmit,
+  buttonText: "Save",
+  loadingButtonText: "Saving...",
+});
 avatarPopUp.setEventListeners();
+
 //Buttons that Open Popup with forms
 // grab from userinfo name + descriptions
 const newUserInfo = new UserInfo(constants.selectors);
@@ -204,7 +214,7 @@ function handleAddModalSubmit(modalInputs, popupForm) {
     .postCards(modalInputs)
     .then((res) => {
       const newCard = renderCard(res);
-      cardSection.addItems(newCard);
+      cardSection.addItem(newCard); // Correct method name is addItem, not addItems
       popupForm.reset();
       addFormValidator.toggleButtonState();
       cardPopUp.closeModal();

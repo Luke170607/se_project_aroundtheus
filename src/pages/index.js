@@ -9,7 +9,6 @@ import "../blocks/profile.css";
 // import all the classes //
 
 import Card from "../components/Card";
-// import initialCards from "../utils/constants.js"; //
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
@@ -60,9 +59,8 @@ confirmPopup.setEventListeners();
 
 function handleDelete(id, card) {
   confirmPopup.openModal();
+  confirmPopup.renderLoading(true); // Initiate loading state before API request
   confirmPopup.setSubmitAction(() => {
-    confirmPopup.renderLoading(true); // Show loading state
-
     api
       .deleteCards(id)
       .then(() => {
@@ -84,7 +82,7 @@ function handleToggleLikes(id, isLiked, card) {
   if (isLiked === false) {
     isLiked = true;
     api
-      .toLike(id)
+      .addLike(id)
       .then(() => {
         card.handleLike();
       })
@@ -94,13 +92,24 @@ function handleToggleLikes(id, isLiked, card) {
   } else {
     isLiked = false;
     api
-      .notLiked(id)
+      .removeLike(id)
       .then(() => {
         card.handleLike();
       })
       .catch((err) => {
         console.error(err); //Error gets logged to the console //
       });
+  }
+}
+
+//Moved the function outside of the class//
+function toggleButtonState(form) {
+  if (form instanceof HTMLFormElement) {
+    const inputs = form.querySelectorAll(".popup__form-input");
+    const button = form.querySelector(".popup__form-button");
+    // toggles the button state //
+  } else {
+    console.error("toggleButtonState: Invalid form element");
   }
 }
 
@@ -158,6 +167,7 @@ avatarPopUp.setEventListeners();
 const newUserInfo = new UserInfo(constants.selectors);
 constants.profileEditButton.addEventListener("click", () => {
   handleFormFill(newUserInfo.getUserInfo());
+  toggleButtonState(profilePopup.form); // Use profilePopup.form to access the form
   return profilePopup.openModal();
 });
 constants.addButton.addEventListener("click", () => {
@@ -165,6 +175,7 @@ constants.addButton.addEventListener("click", () => {
 });
 
 constants.profileAvatar.addEventListener("click", () => {
+  toggleButtonState(avatarPopUp); // Assuming toggleButtonState needs the form as an argument
   return avatarPopUp.openModal();
 });
 
@@ -196,14 +207,11 @@ function handleProfileEditSubmit(modalInputs, popupForm) {
     .then(() => {
       const { title, description } = modalInputs;
       newUserInfo.setUserInfo(title, description);
-      editFormValidator._toggleButtonState(
-        this._popupForm.querySelectorAll(".popup__form-input"),
-        popupForm.querySelector(".popup__form-button")
-      );
+      toggleButtonState(popupForm); // Use the new function
       profilePopup.closeModal();
     })
     .catch((err) => {
-      console.error(err); // log the error to the console
+      console.error(err);
     })
     .finally(() => {
       popupForm.querySelector(".popup__form-button").innerText = "Save";
@@ -214,13 +222,12 @@ function handleAddModalSubmit(modalInputs, popupForm) {
     .postCards(modalInputs)
     .then((res) => {
       const newCard = renderCard(res);
-      cardSection.addItem(newCard); // Correct method name is addItem, not addItems
-      popupForm.reset();
+      cardSection.addItem(newCard);
       addFormValidator.toggleButtonState();
       cardPopUp.closeModal();
     })
     .catch((err) => {
-      console.error(err); // log the error to the console
+      console.error(err);
     })
     .finally(() => {
       popupForm.querySelector(".popup__form-button").innerText = "Save";

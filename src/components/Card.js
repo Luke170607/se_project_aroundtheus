@@ -16,21 +16,12 @@ export default class Card {
     this._handleCardClick = handleCardClick;
     this._handleDelete = handleDelete;
     this._handleToggleLikes = handleToggleLikes;
-
-    // //const cardTemplate = document.querySelector("#card-template");
-    // // const clone = cardTemplate.cloneNode(true);
-    // /const clone = document.importNode(cardTemplate.content, true);
-    // ///this._deleteButton = clone.querySelector(".gallery__card-delete");
-    // this._likeButton = clone.querySelector(".gallery__card-button");
-    // this._cardImage = clone.querySelector(".gallery__card-image");
-
-    // document.querySelector(".gallery__cards").appendChild(clone);
   }
 
   //like button
   _setEventListeners() {
     this._likeButton.addEventListener("click", () => {
-      this._handleToggleLikes(this._id, this._isLiked, this);
+      this._handleToggleLikes(this._id, this._isLiked);
     });
 
     // delete button\
@@ -45,9 +36,15 @@ export default class Card {
   }
 
   //EVT handlers //
-  handleLike() {
+  setIsLiked(isLiked) {
+    this._isLiked = isLiked;
+    this._updateLikeStatus();
+  }
+
+  setIsLikedUI() {
     this._likeButton.classList.toggle("gallery__card-button_active");
   }
+
   _updateLikeStatus() {
     if (this._isLiked) {
       this._likeButton.classList.add("gallery__card-button_active");

@@ -1,5 +1,3 @@
-//import { data } from "autoprefixer"; TEST 2//
-
 export class Api {
   constructor({ baseUrl, headers }) {
     // constructor body
@@ -32,7 +30,6 @@ export class Api {
   }
 
   updateInfo({ title, description }) {
-    console.log({ title, description });
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,

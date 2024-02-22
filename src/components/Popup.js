@@ -1,7 +1,6 @@
 export class Popup {
   constructor(popupSelector) {
     this._popupElement = document.querySelector(popupSelector);
-    // this._closeElement = document.querySelector(popupCloseSelector);
     this._closeElement = document.querySelector(
       `#${this._popupElement.id} .popup__container-close`
     );
@@ -22,17 +21,10 @@ export class Popup {
     }
   };
   _closeModalOnRemoteClick = (evt) => {
-    console.log("Click");
-
-    this.closeModal(console.log);
-  };
-
-  _handleContainerClick = (evt) => {
-    // evt.stopPropagation();
+    this.closeModal();
   };
 
   setEventListeners() {
-    this._popupElement.addEventListener("click", this._handleContainerClick);
     this._closeElement.addEventListener("click", this._closeModalOnRemoteClick);
   }
 }

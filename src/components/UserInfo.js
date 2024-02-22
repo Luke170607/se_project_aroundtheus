@@ -20,6 +20,9 @@ export class UserInfo {
 
   setAvatar(link) {
     this._userAvatar.src = link;
-    return link;
+  }
+
+  getAvatar() {
+    return this._userAvatar.src;
   }
 }

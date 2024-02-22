@@ -16,12 +16,17 @@ export default class Card {
     this._handleCardClick = handleCardClick;
     this._handleDelete = handleDelete;
     this._handleToggleLikes = handleToggleLikes;
+
+    // Ensure methods are bound to the instance
+    this._setEventListeners = this._setEventListeners.bind(this);
+    this._updateLikeStatus = this._updateLikeStatus.bind(this);
+    this.handleLike = this.handleLike.bind(this);
   }
 
   //like button
   _setEventListeners() {
     this._likeButton.addEventListener("click", () => {
-      this._handleToggleLikes(this._id, this._isLiked);
+      this._handleToggleLikes(this._id, this._isLiked, this);
     });
 
     // delete button\
@@ -33,6 +38,15 @@ export default class Card {
     this._cardImage.addEventListener("click", () => {
       this._handleCardClick(this._name, this._link);
     });
+  }
+
+  // Handle like method
+  handleLike() {
+    // Toggle the liked status
+    this._isLiked = !this._isLiked;
+
+    // Update the like status in the UI
+    this.setIsLikedUI();
   }
 
   //EVT handlers //

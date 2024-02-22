@@ -79,26 +79,30 @@ function handleDelete(id, card) {
 // Like button handler //
 
 function handleToggleLikes(id, isLiked, card) {
-  if (isLiked === false) {
-    isLiked = true;
-    api
-      .addLike(id)
-      .then(() => {
-        card.handleLike();
-      })
-      .catch((err) => {
-        console.error(err); //Error gets logged to the console //
-      });
+  if (card && typeof card.handleLike === "function") {
+    if (isLiked === false) {
+      isLiked = true;
+      api
+        .addLike(id)
+        .then(() => {
+          card.handleLike();
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      isLiked = false;
+      api
+        .removeLike(id)
+        .then(() => {
+          card.handleLike();
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
   } else {
-    isLiked = false;
-    api
-      .removeLike(id)
-      .then(() => {
-        card.handleLike();
-      })
-      .catch((err) => {
-        console.error(err); //Error gets logged to the console //
-      });
+    console.error("Card or handleLike method is undefined.");
   }
 }
 

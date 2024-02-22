@@ -1,115 +1,265 @@
-import "./index.css";
+import "../blocks/footer.css";
+import "../blocks/gallery.css";
+import "../blocks/header.css";
+import "../blocks/main.css";
+import "../blocks/page.css";
+import "../blocks/popup.css";
+import "../blocks/profile.css";
 
 // import all the classes //
 
 import Card from "../components/Card";
-import FormValidator from "../components/FormValidator";
-import Popup from "../components/Popup";
-import PopupWithForm from "../components/PopupWithForm";
-import PopupWithImage from "../components/PopupWithImage";
-import Section from "../components/Section";
-import UserInfo from "../components/UserInfo";
+import FormValidator from "../components/FormValidator.js";
+import Section from "../components/Section.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
+import { UserInfo } from "../components/UserInfo.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
+import * as constants from "../utils/constants.js";
+import { Api } from "../components/Api.js";
 
-import {
-  initialCards,
-  profileEditBtn,
-  profileEditModal,
-  profileModalCloseBtn,
-  profileModalName,
-  profileModalTitle,
+// Functions //
 
-  profileTitle,
-  addPicBtn,
-  addPicModal,
-  addPicModalCloseBtn,
-  imageModal,
-  imageModalCloseBtn,
-  cardList,
-  validationSettings,
-  profileModalForm,
-} from "../utils/constants.js";
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "bd0f4ac6-05af-45e7-b717-05910a3f3119",
+    "Content-Type": "application/json",
+  },
+});
 
-// Form validation //
+const renderCard = (cardData) => {
+  console.log(document.querySelector(".gallery__card"));
+  const card = new Card(
+    cardData,
+    constants.selectors.cardTemplate,
+    constants.selectors.deleteSelector,
+    handleCardClick,
+    handleDelete,
+    handleToggleLikes,
+    document.querySelector(constants.selectors.deleteButtonSelector),
+    document.querySelector(constants.selectors.likeSelectorSelector),
+    document.querySelector(constants.selectors.imageSelector)
+  );
+  return card.getView();
+};
 
-const addPicPopup = new PopupWithForm("#add-popup", handleAddFormSubmit);
-addPicPopup.setEventListeners();
+const popupImageModal = new PopupWithImage("#image-popup");
+popupImageModal.setEventListeners();
+function handleCardClick(name, link) {
+  popupImageModal.openModal(name, link);
+}
 
-const editProfilePopup = new PopupWithForm(
-  "#edit-popup",
-  handleEditProfileFormSubmit
-);
-editProfilePopup.setEventListeners();
+//Deleting the cards popup API with the event handler //
+const confirmPopup = new PopupWithForm(constants.selectors.deleteSelector, {
+  handleSubmit: () => {}, // your handler logic here
+  buttonText: "Yes",
+  loadingButtonText: "Deleting...",
+});
+confirmPopup.setEventListeners();
+
+function handleDelete(id, card) {
+  confirmPopup.openModal();
+  confirmPopup.renderLoading(true); // Initiate loading state before API request
+  confirmPopup.setSubmitAction(() => {
+    api
+      .deleteCards(id)
+      .then(() => {
+        confirmPopup.closeModal();
+        card.deleteUI();
+      })
+      .catch((err) => {
+        console.error(err); // Error gets logged to the console
+      })
+      .finally(() => {
+        confirmPopup.renderLoading(false); // Hide loading state
+      });
+  });
+}
+
+// Like button handler //
+
+function handleToggleLikes(id, isLiked, card) {
+  if (card && typeof card.handleLike === "function") {
+    if (isLiked === false) {
+      isLiked = true;
+      api
+        .addLike(id)
+        .then(() => {
+          card.handleLike();
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      isLiked = false;
+      api
+        .removeLike(id)
+        .then(() => {
+          card.handleLike();
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  } else {
+    console.error("Card or handleLike method is undefined.");
+  }
+}
+
+//Moved the function outside of the class//
+function toggleButtonState(form) {
+  if (form instanceof HTMLFormElement) {
+    const inputs = form.querySelectorAll(".popup__form-input");
+    const button = form.querySelector(".popup__form-button");
+    // toggles the button state //
+  } else {
+    console.error("toggleButtonState: Invalid form element");
+  }
+}
+
+//Form validation for profile name and description //
 
 const editFormValidator = new FormValidator(
-  validationSettings,
-  profileModalForm
+  constants.settings,
+  constants.profileEditForm
 );
+
 editFormValidator.enableValidation();
 
-const addPicModalForm = addPicModal.querySelector(".popup__form");
-const addFormValidator = new FormValidator(validationSettings, addPicModalForm);
-addFormValidator.enableValidation();
-// // User info //
-
-const userInfo = new UserInfo(".profile__name", ".profile__title");
-
-// // functions //
-
-function handleImageClick(card) {
-  const data = {
-    link: card.src,
-    name: card.alt,
-  };
-  imagePreview.open(data);
-}
-
-function handleAddFormSubmit(data) {
-  renderCard(data);
-  addPicPopup.close();
-}
-
-function handleEditProfileFormSubmit(data) {
-  userInfo.setUserInfo(data);
-  editProfilePopup.close();
-}
-
-// //
-// // EVENT LISTENERS
-// //
-
-profileEditBtn.addEventListener("click", () => {
-  const data = userInfo.getUserInfo();
-  profileModalName.value = data.name;
-  profileModalTitle.value = data.about;
-  editFormValidator.resetValidation();
-  editProfilePopup.open();
-});
-
-addPicBtn.addEventListener("click", () => {
-  addFormValidator.resetValidation();
-  addPicPopup.open();
-});
-
-// //
-// // PopupWithImage
-// //
-
-const imagePreview = new PopupWithImage("#popup-image");
-imagePreview.setEventListeners();
-
-// //
-// // Section
-// //
-
-function renderCard(data) {
-  const card = new Card(data, "#card-template", handleImageClick);
-  const element = card.getView();
-  cardSection.addItem(element);
-}
-
-const cardSection = new Section(
-  { items: initialCards, renderer: renderCard },
-  ".cards__list"
+const avatarFormValidator = new FormValidator(
+  constants.settings,
+  constants.avatarForm
 );
 
-cardSection.renderItems();
+avatarFormValidator.enableValidation();
+
+const addFormValidator = new FormValidator(
+  constants.settings,
+  constants.addModalForm
+);
+
+addFormValidator.enableValidation();
+
+function handleFormFill(userInfoList) {
+  constants.profileTitleInput.value = userInfoList.name;
+  constants.profileDescriptionInput.value = userInfoList.description;
+}
+
+const profilePopup = new PopupWithForm(constants.selectors.profileSelector, {
+  handleSubmit: handleProfileEditSubmit,
+  buttonText: "Save",
+  loadingButtonText: "Saving...",
+});
+profilePopup.setEventListeners();
+
+const cardPopUp = new PopupWithForm(constants.selectors.addSelector, {
+  handleSubmit: handleAddModalSubmit,
+  buttonText: "Save",
+  loadingButtonText: "Saving...",
+});
+cardPopUp.setEventListeners();
+
+const avatarPopUp = new PopupWithForm(constants.selectors.avatarSelector, {
+  handleSubmit: handleAvatarSubmit,
+  buttonText: "Save",
+  loadingButtonText: "Saving...",
+});
+avatarPopUp.setEventListeners();
+
+//Buttons that Open Popup with forms
+// grab from userinfo name + descriptions
+const newUserInfo = new UserInfo(constants.selectors);
+constants.profileEditButton.addEventListener("click", () => {
+  handleFormFill(newUserInfo.getUserInfo());
+  toggleButtonState(profilePopup.form); // Use profilePopup.form to access the form
+  return profilePopup.openModal();
+});
+constants.addButton.addEventListener("click", () => {
+  return cardPopUp.openModal();
+});
+
+constants.profileAvatar.addEventListener("click", () => {
+  toggleButtonState(avatarPopUp); // Assuming toggleButtonState needs the form as an argument
+  return avatarPopUp.openModal();
+});
+
+//initializes new section renders inittial cards and new ones
+let cardSection;
+api
+  .getInitialCards()
+  .then((data) => {
+    cardSection = new Section(
+      {
+        items: data,
+        renderer: renderCard,
+      },
+      constants.selectors.cardSection
+    );
+    cardSection.renderItems();
+  })
+  .catch((err) => {
+    console.error(err); // log the error to the console
+  });
+
+//Submit Button handler
+//Toggle Submit button State
+/**Event Handlers*/
+function handleProfileEditSubmit(modalInputs, popupForm) {
+  console.log(modalInputs);
+  api
+    .updateInfo(modalInputs)
+    .then(() => {
+      const { title, description } = modalInputs;
+      newUserInfo.setUserInfo(title, description);
+      toggleButtonState(popupForm); // Use the new function
+      profilePopup.closeModal();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      popupForm.querySelector(".popup__form-button").innerText = "Save";
+    });
+}
+function handleAddModalSubmit(modalInputs, popupForm) {
+  api
+    .postCards(modalInputs)
+    .then((res) => {
+      const newCard = renderCard(res);
+      cardSection.addItem(newCard);
+      addFormValidator.toggleButtonState();
+      cardPopUp.closeModal();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      popupForm.querySelector(".popup__form-button").innerText = "Save";
+    });
+}
+function handleAvatarSubmit(modalInputs, popupForm) {
+  api
+    .updateAvatar(modalInputs)
+    .then(() => {
+      newUserInfo.setAvatar(modalInputs.Url);
+      popupForm.reset();
+      avatarFormValidator.toggleButtonState();
+      avatarPopUp.closeModal();
+    })
+    .catch((err) => {
+      console.error(err); // log the error to the console
+    })
+    .finally(() => {
+      popupForm.querySelector(".popup__form-button").innerText = "Save";
+    });
+}
+api
+  .loadInfo()
+  .then((data) => {
+    const { name, about, avatar } = data;
+    newUserInfo.setUserInfo(name, about);
+    newUserInfo.setAvatar(avatar);
+  })
+  .catch((err) => {
+    console.error(err); // log the error to the console
+  });

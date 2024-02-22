@@ -50,12 +50,15 @@ export default class FormValidator {
   }
 
   _hasInvalidInput(inputElements) {
-    return inputElements.some((inputElement) => {
+    console.log(inputElements);
+    console.log(Array.isArray(inputElements));
+    return Array.from(inputElements).some((inputElement) => {
       return !inputElement.validity.valid;
     });
   }
 
   _toggleButtonState(inputElements, submitButton) {
+    console.log(inputElements);
     if (this._hasInvalidInput(inputElements)) {
       submitButton.classList.add(this._inactiveButtonClass);
       submitButton.disabled = true;

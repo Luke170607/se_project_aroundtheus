@@ -1,0 +1,86 @@
+.gallery {
+  font-family: "Inter", Arial, sans-serif;
+  width: 100%;
+}
+.gallery__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 282px);
+  gap: 20px 18px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.gallery__card {
+  font-family: "Inter", arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+.gallery__card-image {
+  height: 282px;
+  cursor: pointer;
+}
+.gallery__card-description {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  align-items: center;
+  padding: 25px 0px 25px 20px;
+}
+.gallery__card-title {
+  max-width: 220px;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 29px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-left: 20px;
+  color: black;
+  margin: 0;
+}
+.gallery__card-delete {
+  background-image: url(../images/Trash.svg);
+  width: 18px;
+  height: 19px;
+  border-style: none;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  cursor: pointer;
+  transition: opacity 1s linear;
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  z-index: 1;
+}
+.gallery__card-delete:hover {
+  opacity: 60%;
+}
+.gallery__card-button {
+  background-image: url(../images/like-button-inactive.svg);
+  width: 21px;
+  height: 18px;
+  border-style: none;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  margin-right: 30px;
+  cursor: pointer;
+  transition: opacity 1s linear;
+}
+.gallery__card-button_active {
+  background-image: url(../images/like-button-active.svg);
+}
+.gallery__card-button:hover {
+  opacity: 50%;
+  transition: opacity 1s linear;
+}
+
+@media screen and (max-width: 920px) {
+  .gallery__cards {
+    justify-content: center;
+  }
+}

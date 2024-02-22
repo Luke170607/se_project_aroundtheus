@@ -24,30 +24,48 @@ export const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
-// buttons//
 
-export const profileEditBtn = document.querySelector(".profile__edit-button");
-export const profileEditModal = document.querySelector("#edit-popup");
-export const profileModalCloseBtn =
-  profileEditModal.querySelector(".popup__close");
-export const profileModalName = document.querySelector(".popup__name");
-export const profileModalTitle = document.querySelector(".popup__title");
+export const profileEditModal = document.querySelector("#profile-edit-popup");
+export const addModal = document.querySelector("#card-popup");
+export const addModalForm = addModal.querySelector("#card-popup-form");
+export const profileEditForm = profileEditModal.querySelector(".popup__form");
 export const profileName = document.querySelector(".profile__name");
-export const profileTitle = document.querySelector(".profile__title");
-export const addPicModal = document.querySelector("#add-popup");
-export const addPicBtn = document.querySelector(".profile__add-button");
-export const addPicModalCloseBtn = document.querySelector(".modal__close");
-export const imageModal = document.querySelector("#popup-image");
-export const imageModalCloseBtn = imageModal.querySelector(".modal__close");
-export const cardList = document.querySelector(".cards__list");
+export const profileDescription = document.querySelector(
+  ".profile__description"
+);
+export const profileTitleInput = document.querySelector("#profile-title-input");
+export const profileDescriptionInput = document.querySelector(
+  "#profile-description-input"
+);
+export const profileEditButton = document.querySelector(".profile__edit");
+export const addButton = document.querySelector(".profile__add-button");
+export const avatarModal = document.querySelector("#avatar-popup");
+export const avatarForm = avatarModal.querySelector("#avatar-popup-form");
+export const profileAvatar = document.querySelector(".profile__avatar-image");
+export const confirmPopup = document.querySelector("#delete-popup");
+export const deleteFormSubmit = confirmPopup.querySelector(
+  ".popup__form-button"
+);
 
-export const validationSettings = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_disabled",
-  inputErrorClass: "popup__text-underline-red",
+export const settings = {
+  inputSelector: ".popup__form-input",
+  submitButtonSelector: ".popup__form-button",
+  inactiveButtonClass: "popup__form-button_disabled",
+  inputErrorClass: "popup__input_type_error",
   errorClass: "popup__error_visible",
 };
-
-export const profileModalForm = profileEditModal.querySelector(".popup__form");
+export const selectors = {
+  cardSection: ".gallery__cards",
+  cardTemplate: "#card-template",
+  popupSelector: ".modal",
+  profileSelector: "#profile-edit-popup",
+  addSelector: "#card-popup",
+  imageSelector: ".gallery__card-image",
+  nameSelector: ".profile__name",
+  jobSelector: ".profile__description",
+  avatarSelector: "#avatar-popup",
+  avatarImage: ".profile__avatar-image",
+  deleteSelector: "#delete-popup",
+  deleteButtonSelector: ".gallery__card-delete",
+  likeSelector: ".gallery__card-button",
+};

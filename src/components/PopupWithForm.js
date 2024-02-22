@@ -1,29 +1,46 @@
-import Popup from "./Popup.js";
+import { Popup } from "./Popup.js";
 
-export default class PopupWithForm extends Popup {
-  constructor(popupSelector, handleFormSubmit) {
-    super({ popupSelector });
+export class PopupWithForm extends Popup {
+  constructor(popupSelector, { handleSubmit, buttonText, loadingButtonText }) {
+    super(popupSelector);
     this._popupForm = this._popupElement.querySelector(".popup__form");
-    this._handleFormSubmit = handleFormSubmit;
-  }
-
-  close() {
-    this._popupForm.reset();
-    super.close();
-  }
-
-  _getInputValues() {
-    const inputs = this._popupForm.querySelectorAll(".popup__input");
-    const inputValues = {};
-    inputs.forEach((input) => (inputValues[input.name] = input.value));
-    return inputValues;
+    this._handleSubmit = handleSubmit;
+    this._buttonText = buttonText;
+    this._loadingButtonText = loadingButtonText;
+    this._submitButton = this._popupForm.querySelector(".popup__form-button");
   }
 
   setEventListeners() {
-    this._popupForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      this._handleFormSubmit(this._getInputValues());
-    });
     super.setEventListeners();
+    this._popupForm.addEventListener("submit", (e) => {
+      const modalInputs = this._getInputValues();
+      e.preventDefault();
+      this.renderLoading(true);
+      this._handleSubmit(modalInputs, this._popupForm);
+    });
+  }
+
+  renderLoading(isLoading) {
+    if (isLoading) {
+      this._submitButton.textContent = this._loadingButtonText;
+    } else {
+      this._submitButton.textContent = this._buttonText;
+    }
+  }
+
+  setSubmitAction(callBackfn) {
+    this._handleSubmit = callBackfn;
+  }
+
+  _getInputValues() {
+    const modalInputs = {};
+
+    const modalInputsList =
+      this._popupForm.querySelectorAll(".popup__form-input");
+    console.log(modalInputsList);
+    modalInputsList.forEach((input) => {
+      modalInputs[input.name] = input.value;
+    });
+    return modalInputs;
   }
 }
